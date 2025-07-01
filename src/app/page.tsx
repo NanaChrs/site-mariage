@@ -1,103 +1,107 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [menuOpen, setMenuOpen] = useState(false);
+  const sections = [
+    { id: "hero", label: "Accueil" },
+    { id: "planning", label: "Planning" },
+    { id: "dresscode", label: "Dress code" },
+    { id: "accomodations", label: "Hébergements" },
+    { id: "rsvp", label: "RSVP & Contacts" },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    }
+  };
+
+  return (
+      <div className={styles.page}>
+        {/* Menu mobile */}
+        <button
+            className={styles.menuButton}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Ouvrir le menu"
+        >
+          <span className={styles.menuIcon} />
+        </button>
+
+        {menuOpen && (
+            <nav className={styles.mobileMenu}>
+              <ul>
+                {sections.map((s) => (
+                    <li key={s.id}>
+                      <button onClick={() => scrollToSection(s.id)}>{s.label}</button>
+                    </li>
+                ))}
+              </ul>
+            </nav>
+        )}
+
+        <main className={styles.main}>
+          {/* Hero section */}
+          <section id="hero" className={styles.heroSection}>
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+                src="/file.svg"
+                alt="Image de couverture"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <div className={styles.heroOverlay}>
+              <h1>Bienvenue à notre mariage !</h1>
+            </div>
+          </section>
+
+          {/* Planning */}
+          <section id="planning" className={styles.section}>
+            <h2>Planning de la cérémonie</h2>
+            <ul>
+              <li>15h00 : Cérémonie à la mairie</li>
+              <li>16h30 : Vin d'honneur</li>
+              <li>19h00 : Dîner et soirée</li>
+              <li>23h00 : Ouverture du bal</li>
+            </ul>
+          </section>
+
+          {/* Dress code */}
+          <section id="dresscode" className={styles.section}>
+            <h2>Dress code</h2>
+            <p>Merci de privilégier les couleurs pastel et tenues élégantes.</p>
+            <p>Évitez le blanc (réservé à la mariée) et le noir complet.</p>
+          </section>
+
+          {/* Hébergements */}
+          <section id="accomodations" className={styles.section}>
+            <h2>Hébergements à proximité</h2>
+            <ul>
+              <li>Hôtel du Parc – 5 min à pied – Tel: 01 23 45 67 89</li>
+              <li>Chambres d'hôtes Les Fleurs – 10 min en voiture</li>
+              <li>Airbnb disponibles dans la région</li>
+              <li>Camping municipal – 15 min en voiture</li>
+            </ul>
+          </section>
+
+          {/* RSVP & Contacts */}
+          <section id="rsvp" className={styles.section}>
+            <h2>RSVP & Contacts</h2>
+            <p>Merci de confirmer votre présence avant le 1er août 2025.</p>
+            <p>
+              Contact :{" "}
+              <a href="mailto:mathilde@example.com">mathilde@example.com</a>
+            </p>
+            <p>
+              Téléphone :{" "}
+              <a href="tel:+33123456789">01 23 45 67 89</a>
+            </p>
+          </section>
+        </main>
+      </div>
   );
 }
