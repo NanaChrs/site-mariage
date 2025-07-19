@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import AccommodationsCarousel from "./components/accommodations";
+import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
 
 export default function Home() {
@@ -56,6 +57,7 @@ export default function Home() {
           </Typography>
         </div>
         <AccommodationsCarousel />
+        <RSVPForm />
       </section>
     </>
   );
