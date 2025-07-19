@@ -69,12 +69,22 @@ export default function Home() {
             level="body-lg"
             sx={{ mb: 2 }}
           >
-            Nous avons le plaisir de vous inviter à notre mariage qui aura lieu le <span style={{ fontWeight: 'bold' }}>samedi 29 août 2026 à 16h</span> au <span style={{ fontWeight: 'bold' }}>Chateau de Vins-sur-Caramy, 1 Les Prés du Château, 83170 Vins-sur-Caramy</span>.
+            Nous avons le plaisir de vous inviter à notre mariage qui aura lieu le{" "}
+            <Typography component="span" sx={{ fontWeight: 'bold' }}>
+              samedi 29 août 2026 à 16h
+            </Typography>{" "}
+            au{" "}
+            <Typography component="span" sx={{ fontWeight: 'bold' }}>
+              Chateau de Vins-sur-Caramy, 1 Les Prés du Château, 83170 Vins-sur-Caramy
+            </Typography>.
           </Typography>
           <Typography
             level="body-md"
           >
-            Merci de confirmer votre présence avant le <span style={{ fontWeight: 'bold' }}>1er mars 2026</span>.<br />
+            Merci de confirmer votre présence avant le{" "}
+            <Typography component="span" sx={{ fontWeight: 'bold' }}>
+              1er mars 2026
+            </Typography>.<br />
             Nous avons hâte de partager ce moment unique avec vous !
           </Typography>
           <Typography sx={{ mt: 2, fontStyle: 'italic' }}>

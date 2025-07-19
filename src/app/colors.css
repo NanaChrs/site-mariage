@@ -5,33 +5,33 @@
   --color-black: #000000;
 
   /* Couleurs de fond */
-  --color-background-main: #ffffff;
-  --color-background-footer: #f5f5f5;
+  --color-background-main: #faf7ff; /* Fond lavande très doux */
+  --color-background-footer: #f0e6ff; /* Rose lavande un peu plus marqué */
 
   /* Couleurs de texte */
-  --color-text-primary: #000000;
-  --color-text-secondary: #444444;
+  --color-text-primary: #333333; /* Gris foncé moderne */
+  --color-text-secondary: #666666; /* Gris moyen */
   --color-text-on-dark: #ffffff;
 
   /* Couleurs d'overlay et assombrissement */
-  --color-overlay-light: rgba(0,0,0,0.3);
-  --color-overlay-medium: rgba(0,0,0,0.4);
-  --color-overlay-strong: rgba(0,0,0,0.7);
-  --color-overlay-gradient-bottom: rgba(0,0,0,0.8);
+  --color-overlay-light: rgba(0, 0, 0, 0.3); /* Noir transparent neutre */
+  --color-overlay-medium: rgba(0, 0, 0, 0.4);
+  --color-overlay-strong: rgba(0, 0, 0, 0.7);
+  --color-overlay-gradient-bottom: rgba(0, 0, 0, 0.8);
 
   /* Couleurs des ombres */
-  --color-shadow-light: rgba(0,0,0,0.08);
-  --color-shadow-medium: rgba(0,0,0,0.12);
-  --color-shadow-strong: rgba(0,0,0,0.18);
-  --color-shadow-text: rgba(0,0,0,0.5);
+  --color-shadow-light: rgba(0, 0, 0, 0.08); /* Ombres neutres */
+  --color-shadow-medium: rgba(0, 0, 0, 0.12);
+  --color-shadow-strong: rgba(0, 0, 0, 0.18);
+  --color-shadow-text: rgba(0, 0, 0, 0.5); /* Ombre de texte neutre */
 
   /* Couleurs des boutons et interactions */
-  --color-button-primary: rgba(241, 60, 218, 0.84);
-  --color-pagination-bullet: #333333;
-  --color-pagination-active: rgba(241, 60, 218, 0.84);
-  --color-navigation: #333333;
+  --color-button-primary: #ff1493; /* Rose fuchsia éclatant */
+  --color-pagination-bullet: #999999; /* Gris clair pour pagination inactive */
+  --color-pagination-active: #ffd700; /* Jaune doré actif */
+  --color-navigation: #ff1493; /* Rose fuchsia pour navigation - cohérent avec les boutons */
 
   /* Couleurs Material UI (pour cohérence) */
-  --mui-text-muted: #666666;
-  --mui-text-copyright: #999999;
+  --mui-text-muted: #ff69b4; /* Rose vif */
+  --mui-text-copyright: #ffa500; /* Orange vif */
 }
