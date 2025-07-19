@@ -1,30 +1,54 @@
 import Image from "next/image";
-import styles from "./page.module.css";
 import AccommodationsCarousel from "./components/accommodations";
 import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
+import CardCover from "@mui/joy/CardCover";
+import CardContent from "@mui/joy/CardContent";
+import Card from "@mui/joy/Card";
 
 export default function Home() {
   return (
     <>
-      <section
-        style={{
+      <Card
+        sx={{
           position: "relative",
           width: "100vw",
           height: "100vh",
           overflow: "hidden",
+          borderRadius: 0,
         }}
       >
-        <Image
-          src="/file.svg"
-          alt="Background"
-          fill
-          className={styles.fullscreenBg}
-          priority
-          style={{ objectFit: "cover" }}
+        <CardCover>
+          <Image
+            src="/file.svg"
+            alt="Background"
+            fill
+            priority
+            style={{ objectFit: "cover" }}
+          />
+        </CardCover>
+        <CardCover
+          sx={{
+            background: "rgba(0,0,0,0.3)",
+          }}
         />
-        <div className={styles.overlayText}>Laurent & Mathilde</div>
-      </section>
+        <CardContent
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "white",
+            fontSize: "3rem",
+            fontWeight: "bold",
+            textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+            textAlign: "center",
+            zIndex: 2,
+          }}
+        >
+          Laurent & Mathilde
+        </CardContent>
+      </Card>
       <section
         style={{
           position: "relative",
@@ -57,7 +81,9 @@ export default function Home() {
           </Typography>
         </div>
         <AccommodationsCarousel />
-        <RSVPForm />
+        <div style={{ maxWidth: 400, margin: '48px auto 0 auto' }}>
+          <RSVPForm />
+        </div>
       </section>
     </>
   );
