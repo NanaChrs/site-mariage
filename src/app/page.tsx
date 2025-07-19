@@ -5,6 +5,7 @@ import Typography from "@mui/joy/Typography";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Card from "@mui/joy/Card";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -85,6 +86,7 @@ export default function Home() {
           <RSVPForm />
         </div>
       </section>
+      <Footer />
     </>
   );
 }
