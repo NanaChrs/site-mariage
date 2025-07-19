@@ -2,12 +2,16 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
+import styles from './accomodations.module.css';
 import Image from 'next/image';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
+import CardCover from '@mui/joy/CardCover';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
-import { Pagination } from 'swiper/modules';
 
 interface Accommodation {
   name: string;
@@ -47,16 +51,36 @@ export default function AccommodationsCarousel() {
       <Typography level="h2" sx={{ mb: 3, textAlign: 'center', fontWeight: 'bold' }}>
         Suggestions de logements
       </Typography>
-      <Swiper pagination={{ dynamicBullets: true }} modules={[Pagination]}>
+      <Swiper
+        slidesPerView={1}
+        breakpoints={{
+          900: { slidesPerView: 2 },
+          1200: { slidesPerView: 3 }
+        }}
+        spaceBetween={32}
+        loop={true}
+        pagination={{ clickable: true }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className={styles.mySwiper}
+      >
         {accommodations.map((acc) => (
           <SwiperSlide key={acc.name}>
-            <Card variant="outlined" sx={{ minWidth: 280, maxWidth: 320, mx: 'auto', my: 2 }}>
-              <Image src={acc.image} alt={acc.name} width={300} height={180} style={{ borderRadius: 12, objectFit: 'cover' }} />
-              <CardContent>
-                <Typography level="h3" sx={{ fontSize: '1.2rem', fontWeight: 'bold', mt: 1 }}>{acc.name}</Typography>
-                <Typography level="body-md" sx={{ color: 'neutral.700', mb: 1 }}>{acc.price} / nuit / personne</Typography>
-                <Typography level="body-sm" sx={{ color: 'neutral.600', mb: 2 }}>Pour {acc.people} personne{acc.people > 1 ? 's' : ''}</Typography>
-                <Button component="a" href={acc.url} target="_blank" rel="noopener noreferrer" variant="soft" color="primary">
+            <Card sx={{ minWidth: 0, maxWidth: '100%', width: '100%', height: 320, boxShadow: 'none', position: 'relative', overflow: 'hidden', borderRadius: 24, mx: 0, my: 0, p: 0, background: 'none' }}>
+              <CardCover>
+                <Image src={acc.image} alt={acc.name} fill style={{ objectFit: 'cover', filter: 'brightness(0.85) drop-shadow(0 4px 24px rgba(0,0,0,0.18))', borderRadius: 24 }} />
+              </CardCover>
+              <CardCover
+                sx={{
+                  background:
+                    'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
+                }}
+              />
+              <CardContent sx={{ position: 'absolute', left: 0, bottom: 0, width: '100%', height: '100%', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', color: '#fff', background: 'none' }}>
+                <Typography level="h3" sx={{ fontSize: '1.4rem', fontWeight: 'bold', mb: 1, color: '#fff' }}>{acc.name}</Typography>
+                <Typography level="body-md" sx={{ fontSize: '1.1rem', fontWeight: 500, mb: 1, color: '#fff' }}>{acc.price} / nuit / personne</Typography>
+                <Typography level="body-sm" sx={{ fontSize: '1rem', opacity: 0.85, mb: 2, color: '#fff' }}>Pour {acc.people} personne{acc.people > 1 ? 's' : ''}</Typography>
+                <Button component="a" href={acc.url} target="_blank" rel="noopener noreferrer" variant="soft" color="primary" sx={{ textDecoration: 'underline', fontSize: '1rem', mt: 1 }}>
                   Voir le logement
                 </Button>
               </CardContent>

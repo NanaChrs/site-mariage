@@ -1,35 +1,90 @@
 .carouselItem {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-  padding: 24px;
-  gap: 12px;
-  min-width: 280px;
-  max-width: 320px;
+  align-items: stretch;
+  background: transparent;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  min-width: 320px;
+  max-width: 420px;
+  width: 80vw;
+  height: 320px;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 24px;
 }
 .carouselImage {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 180px;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  z-index: 1;
+  filter: brightness(0.85) drop-shadow(0 4px 24px rgba(0,0,0,0.18));
+  border-radius: 24px;
+}
+.carouselOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 32px 24px;
+  color: #fff;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  background: none;
+  border-radius: 0 0 24px 24px;
+}
+.carouselTitle, .carouselDetails, .carouselLink {
+  text-shadow: none;
 }
 .carouselTitle {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  margin-top: 8px;
+  margin-bottom: 8px;
 }
 .carouselDetails {
-  font-size: 1rem;
-  color: #444;
+  font-size: 1.1rem;
+  color: #fff;
   margin-bottom: 8px;
 }
 .carouselLink {
-  color: #0070f3;
+  color: #fff;
   text-decoration: underline;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 8px;
+}
+.mySwiper {
+  position: relative;
+  padding: 24px;
 }
 
+.mySwiper :global(.swiper-pagination) {
+  bottom: 0 !important;
+  position: absolute;
+}
+
+.mySwiper :global(.swiper-pagination-bullet) {
+  background: #333;
+  opacity: 0.8;
+  width: 12px;
+  height: 12px;
+}
+
+.mySwiper :global(.swiper-pagination-bullet-active) {
+  background: #007bff;
+  opacity: 1;
+}
+
+.mySwiper :global(.swiper-button-next),
+.mySwiper :global(.swiper-button-prev) {
+  color: #333;
+}
