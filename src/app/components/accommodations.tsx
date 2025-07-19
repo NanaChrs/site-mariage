@@ -68,18 +68,17 @@ export default function AccommodationsCarousel() {
           <SwiperSlide key={acc.name}>
             <Card sx={{ minWidth: 0, maxWidth: '100%', width: '100%', height: 320, boxShadow: 'none', position: 'relative', overflow: 'hidden', borderRadius: 24, mx: 0, my: 0, p: 0, background: 'none' }}>
               <CardCover>
-                <Image src={acc.image} alt={acc.name} fill style={{ objectFit: 'cover', filter: 'brightness(0.85) drop-shadow(0 4px 24px rgba(0,0,0,0.18))', borderRadius: 24 }} />
+                <Image src={acc.image} alt={acc.name} fill style={{ objectFit: 'cover', filter: 'drop-shadow(0 4px 24px var(--color-shadow-strong))' }} />
               </CardCover>
               <CardCover
                 sx={{
-                  background:
-                    'linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)',
+                  background: 'linear-gradient(to top, var(--color-overlay-medium), rgba(0,0,0,0) 200px), linear-gradient(to top, var(--color-overlay-gradient-bottom), rgba(0,0,0,0) 300px)',
                 }}
               />
-              <CardContent sx={{ position: 'absolute', left: 0, bottom: 0, width: '100%', height: '100%', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', color: '#fff', background: 'none' }}>
-                <Typography level="h3" sx={{ fontSize: '1.4rem', fontWeight: 'bold', mb: 1, color: '#fff' }}>{acc.name}</Typography>
-                <Typography level="body-md" sx={{ fontSize: '1.1rem', fontWeight: 500, mb: 1, color: '#fff' }}>{acc.price} / nuit / personne</Typography>
-                <Typography level="body-sm" sx={{ fontSize: '1rem', opacity: 0.85, mb: 2, color: '#fff' }}>Pour {acc.people} personne{acc.people > 1 ? 's' : ''}</Typography>
+              <CardContent sx={{ position: 'absolute', left: 0, bottom: 0, width: '100%', height: '100%', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-end', color: 'var(--color-text-on-dark)', background: 'none' }}>
+                <Typography level="h3" sx={{ fontSize: '1.4rem', fontWeight: 'bold', mb: 1, color: 'var(--color-text-on-dark)' }}>{acc.name}</Typography>
+                <Typography level="body-md" sx={{ fontSize: '1.1rem', fontWeight: 500, mb: 1, color: 'var(--color-text-on-dark)' }}>{acc.price} / nuit / personne</Typography>
+                <Typography level="body-sm" sx={{ fontSize: '1rem', opacity: 0.85, mb: 2, color: 'var(--color-text-on-dark)' }}>Pour {acc.people} personne{acc.people > 1 ? 's' : ''}</Typography>
                 <Button component="a" href={acc.url} target="_blank" rel="noopener noreferrer" variant="soft" color="primary" sx={{ textDecoration: 'underline', fontSize: '1rem', mt: 1 }}>
                   Voir le logement
                 </Button>

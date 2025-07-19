@@ -30,7 +30,7 @@ export default function Home() {
         </CardCover>
         <CardCover
           sx={{
-            background: "rgba(0,0,0,0.3)",
+            background: "var(--color-overlay-light)",
           }}
         />
         <CardContent
@@ -39,10 +39,10 @@ export default function Home() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            color: "white",
+            color: "var(--color-text-on-dark)",
             fontSize: "3rem",
             fontWeight: "bold",
-            textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+            textShadow: "0 2px 8px var(--color-shadow-text)",
             textAlign: "center",
             zIndex: 2,
           }}
@@ -54,7 +54,7 @@ export default function Home() {
         style={{
           position: "relative",
           zIndex: 2,
-          background: "white",
+          background: "var(--color-background-main)",
           padding: "48px 0",
         }}
       >
