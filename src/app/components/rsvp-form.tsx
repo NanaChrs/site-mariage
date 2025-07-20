@@ -11,30 +11,42 @@ import Stack from "@mui/joy/Stack";
 import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+type RsvpForm = {
+  nom: string;
+  prenom: string;
+  regime: "omnivore" | "vegetarien" | "pescatarien";
+  email: string;
+  comment?: string;
+};
+
+type PlusOneForm = Pick<RsvpForm, "nom" | "prenom" | "regime"> & {
+    age?: number;
+};
+
 export default function RsvpForm() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<RsvpForm>({
     nom: "",
     prenom: "",
     regime: "omnivore",
     email: "",
   });
-  const [plusOnes, setPlusOnes] = useState<{ nom: string; prenom: string; regime: string; age: string }[]>([]);
+  const [plusOnes, setPlusOnes] = useState<PlusOneForm[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [presence, setPresence] = useState<string>("");
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: unknown) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleAccompagnantChange = (idx: number, field: string, value: string) => {
+  const handlePlusOnesChange = (idx: number, field: string, value: string) => {
     setPlusOnes((prev) => prev.map((a, i) => i === idx ? { ...a, [field]: value } : a));
   };
 
-  const addAccompagnant = () => {
-    setPlusOnes((prev) => [...prev, { nom: '', prenom: '', regime: 'omnivore', age: '' }]);
+  const addPlusOnes = () => {
+    setPlusOnes((prev) => [...prev, { nom: '', prenom: '', regime: 'omnivore' }]);
   };
 
-  const removeAccompagnant = (idx: number) => {
+  const removePlusOnes = (idx: number) => {
     setPlusOnes((prev) => prev.filter((_, i) => i !== idx));
   };
 
@@ -111,7 +123,7 @@ export default function RsvpForm() {
         <Option value="pescatarien">Pescatarien</Option>
       </Select>
       <Typography level="body-md" sx={{ mt: 2 }}>
-        Accompagnants (facultatif) :
+        Accompagnant (facultatif) :
       </Typography>
       {plusOnes.map((a, idx) => (
         <Stack direction="row" spacing={1} alignItems="center" key={idx}>
@@ -119,7 +131,7 @@ export default function RsvpForm() {
             placeholder="Nom de l'accompagnant"
             required
             value={a.nom}
-            onChange={(e) => handleAccompagnantChange(idx, 'nom', e.target.value)}
+            onChange={(e) => handlePlusOnesChange(idx, 'nom', e.target.value)}
             sx={{ flex: 1 }}
             disabled={submitted || presence !== "oui"}
           />
@@ -127,7 +139,7 @@ export default function RsvpForm() {
             placeholder="Prénom de l'accompagnant"
             required
             value={a.prenom}
-            onChange={(e) => handleAccompagnantChange(idx, 'prenom', e.target.value)}
+            onChange={(e) => handlePlusOnesChange(idx, 'prenom', e.target.value)}
             sx={{ flex: 1 }}
             disabled={submitted || presence !== "oui"}
           />
@@ -136,13 +148,13 @@ export default function RsvpForm() {
             placeholder="Âge"
             required
             value={a.age}
-            onChange={(e) => handleAccompagnantChange(idx, 'age', e.target.value)}
+            onChange={(e) => handlePlusOnesChange(idx, 'age', e.target.value)}
             sx={{ width: 80 }}
             disabled={submitted || presence !== "oui"}
           />
           <Select
             value={a.regime}
-            onChange={(_, value) => handleAccompagnantChange(idx, 'regime', value as string)}
+            onChange={(_, value) => handlePlusOnesChange(idx, 'regime', value as string)}
             required
             sx={{ minWidth: 120 }}
             disabled={submitted || presence !== "oui"}
@@ -151,20 +163,20 @@ export default function RsvpForm() {
             <Option value="vegetarien">Végétarien</Option>
             <Option value="pescatarien">Pescatarien</Option>
           </Select>
-          <IconButton color="danger" onClick={() => removeAccompagnant(idx)} disabled={submitted || presence !== "oui"}>
+          <IconButton color="danger" onClick={() => removePlusOnes(idx)} disabled={submitted || presence !== "oui"}>
             <DeleteIcon />
           </IconButton>
         </Stack>
       ))}
-      <Button variant="soft" color="neutral" onClick={addAccompagnant} sx={{ alignSelf: 'flex-start' }} disabled={submitted || presence !== "oui"}>
-        Ajouter un accompagnant
+      <Button variant="soft" color="neutral" onClick={addPlusOnes} sx={{ alignSelf: 'flex-start' }} disabled={submitted || presence !== "oui"}>
+        Ajouter un plusOnes
       </Button>
       <Typography level="body-sm" sx={{ fontStyle: 'italic', mb: 1 }}>
-        Merci d'indiquer le régime alimentaire de chaque personne. Vous pouvez ajouter un commentaire ou une note spéciale ci-dessous si besoin.
+        Merci d&apos;indiquer le régime alimentaire de chaque personne. Vous pouvez ajouter un commentaire ou une note spéciale ci-dessous si besoin.
       </Typography>
       <Input
         placeholder="Commentaire ou note spéciale (facultatif)"
-        value={form.commentaire || ""}
+        value={form.comment || ""}
         onChange={(e) => handleChange("commentaire", e.target.value)}
         sx={{ mb: 1 }}
         disabled={submitted}
