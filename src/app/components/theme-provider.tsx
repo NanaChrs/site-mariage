@@ -106,19 +106,12 @@ const customTheme = extendTheme({
     JoyTypography: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
-          // Éléments avec fontWeight bold en orange foncé (mais pas les titres)
-          ...(ownerState.sx?.fontWeight === 'bold' &&
-              ownerState.level !== 'h1' &&
-              ownerState.level !== 'h2' &&
-              ownerState.level !== 'h3' && {
-            color: '#d97706',
-          }),
-          // Tous les titres h2 et h3 en rose fuchsia avec même taille (mais seulement si pas de couleur explicite)
-          ...(ownerState.level === 'h2' && !ownerState.sx?.color && {
+          // Tous les titres h2 et h3 en rose fuchsia avec même taille
+          ...(ownerState.level === 'h2' && {
             color: '#ff1493',
             fontSize: '1.5rem',
           }),
-          ...(ownerState.level === 'h3' && !ownerState.sx?.color && {
+          ...(ownerState.level === 'h3' && {
             color: '#ff1493',
             fontSize: '1.5rem',
           }),
