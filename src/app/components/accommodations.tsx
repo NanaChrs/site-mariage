@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
-import styles from './accomodations.module.css';
+import styles from '../styles/accomodations.module.css';
 import Image from 'next/image';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';

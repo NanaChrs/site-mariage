@@ -39,7 +39,7 @@ export default function Home() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            color: "var(--color-text-on-dark)",
+            color: "#DA363B", // Rouge du faire-part
             fontSize: "3rem",
             fontWeight: "bold",
             textShadow: "0 2px 8px var(--color-shadow-text)",
