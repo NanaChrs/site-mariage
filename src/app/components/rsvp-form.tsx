@@ -6,10 +6,11 @@ import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
-import Alert from "@mui/joy/Alert";
 import Stack from "@mui/joy/Stack";
 import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmationModal from "./confirmation-modal";
+import Snackbar from "@mui/joy/Snackbar";
 
 type RsvpForm = {
   nom: string;
@@ -33,6 +34,8 @@ export default function RsvpForm() {
   const [plusOnes, setPlusOnes] = useState<PlusOneForm[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [presence, setPresence] = useState<string>("");
+  const [openModal, setOpenModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const handleChange = (field: string, value: unknown) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -52,7 +55,17 @@ export default function RsvpForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (presence === "oui") {
+      setOpenModal(true);
+    } else {
+      handleConfirmSubmit();
+    }
+  };
+
+  const handleConfirmSubmit = () => {
     setSubmitted(true);
+    setOpenModal(false);
+    setShowToast(true);
     // Ici, tu peux ajouter la logique d'envoi (API, email, etc.)
   };
 
@@ -73,11 +86,7 @@ export default function RsvpForm() {
       <Typography level="h3" sx={{ mb: 2, textAlign: "center" }}>
         Confirmez votre présence
       </Typography>
-      {submitted && (
-        <Alert color="success" variant="soft" sx={{ mb: 2 }}>
-          Merci pour votre réponse !
-        </Alert>
-      )}
+
       <Input
         placeholder="Nom"
         required
@@ -184,6 +193,24 @@ export default function RsvpForm() {
       <Button type="submit" variant="solid" color="primary" disabled={!presence || submitted}>
         Envoyer
       </Button>
+
+      <ConfirmationModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onConfirm={handleConfirmSubmit}
+        mainPerson={{ nom: form.nom, prenom: form.prenom }}
+        plusOnes={plusOnes}
+      />
+
+      <Snackbar
+        open={showToast}
+        onClose={() => setShowToast(false)}
+        autoHideDuration={4000}
+        color="success"
+        variant="soft"
+      >
+        Merci pour votre réponse !
+      </Snackbar>
     </Box>
   );
 }
