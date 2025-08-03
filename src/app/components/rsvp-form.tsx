@@ -11,6 +11,7 @@ import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConfirmationModal from "./confirmation-modal";
 import Snackbar from "@mui/joy/Snackbar";
+import Alert from "@mui/joy/Alert";
 
 type RsvpForm = {
   nom: string;
@@ -36,6 +37,8 @@ export default function RsvpForm() {
   const [presence, setPresence] = useState<string>("");
   const [openModal, setOpenModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (field: string, value: unknown) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -62,11 +65,76 @@ export default function RsvpForm() {
     }
   };
 
-  const handleConfirmSubmit = () => {
-    setSubmitted(true);
-    setOpenModal(false);
-    setShowToast(true);
-    // Ici, tu peux ajouter la logique d'envoi (API, email, etc.)
+  const handleConfirmSubmit = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Envoi de la personne principale
+      const mainPersonData = {
+        name: form.nom,
+        firstname: form.prenom,
+        email: form.email,
+        diet: presence === "oui" ? form.regime : null,
+        comment: form.comment || null,
+        phone: null, // Pas de téléphone dans le formulaire actuel
+        age: null, // Pas d'âge pour la personne principale
+        isComing: presence === "oui"
+      };
+
+      const mainResponse = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mainPersonData),
+      });
+
+      if (!mainResponse.ok) {
+        const errorData = await mainResponse.json();
+        throw new Error(errorData.error || 'Erreur lors de l\'envoi');
+      }
+
+      // Envoi des accompagnants si présence confirmée
+      if (presence === "oui" && plusOnes.length > 0) {
+        for (const plusOne of plusOnes) {
+          const plusOneData = {
+            name: plusOne.nom,
+            firstname: plusOne.prenom,
+            email: `${plusOne.prenom.toLowerCase()}.${plusOne.nom.toLowerCase()}@accompagnant.temp`,
+            diet: plusOne.regime,
+            age: plusOne.age || null,
+            comment: `Accompagnant de ${form.prenom} ${form.nom}`,
+            phone: null,
+            isComing: true
+          };
+
+          const plusOneResponse = await fetch('/api/rsvp', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(plusOneData),
+          });
+
+          if (!plusOneResponse.ok) {
+            const errorData = await plusOneResponse.json();
+            console.error('Erreur accompagnant:', errorData);
+            // Continue avec les autres accompagnants même si un échoue
+          }
+        }
+      }
+
+      setSubmitted(true);
+      setOpenModal(false);
+      setShowToast(true);
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      setError(error instanceof Error ? error.message : 'Une erreur est survenue');
+      setOpenModal(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -86,6 +154,12 @@ export default function RsvpForm() {
       <Typography level="h3" sx={{ mb: 2, textAlign: "center" }}>
         Confirmez votre présence
       </Typography>
+
+      {error && (
+        <Alert color="danger" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
 
       <Input
         placeholder="Nom"
@@ -190,8 +264,14 @@ export default function RsvpForm() {
         sx={{ mb: 1 }}
         disabled={submitted}
       />
-      <Button type="submit" variant="solid" color="primary" disabled={!presence || submitted}>
-        Envoyer
+      <Button
+        type="submit"
+        variant="solid"
+        color="primary"
+        disabled={!presence || submitted || isLoading}
+        loading={isLoading}
+      >
+        {isLoading ? 'Envoi en cours...' : 'Envoyer'}
       </Button>
 
       <ConfirmationModal
@@ -205,9 +285,8 @@ export default function RsvpForm() {
       <Snackbar
         open={showToast}
         onClose={() => setShowToast(false)}
-        autoHideDuration={4000}
+        autoHideDuration={5000}
         color="success"
-        variant="soft"
       >
         Merci pour votre réponse !
       </Snackbar>
