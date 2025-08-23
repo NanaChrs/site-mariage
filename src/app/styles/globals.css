@@ -2,12 +2,12 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background: #F9E0F5 !important; /* Fond rose clair forcé */
+  background: var(--color-background-main) !important; /* Fond blanc */
 }
 
 body {
-  color: #DA363B !important; /* Texte rouge du faire-part forcé */
-  background: #F9E0F5 !important; /* Fond rose clair du faire-part forcé */
+  color: var(--color-text-main) !important; /* Texte noir par défaut */
+  background: var(--color-background-main) !important; /* Fond blanc */
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,4 +22,32 @@ body {
 a {
   color: #DA363B; /* Liens en rouge */
   text-decoration: none;
+}
+
+/* Media queries pour le formulaire responsive */
+@media (min-width: 769px) {
+  .form-overlay-desktop {
+    display: flex !important;
+  }
+
+  .form-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-overlay-desktop {
+    display: none !important;
+  }
+
+  .form-mobile {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Réduire la hauteur de l'image sur mobile */
+  .mobile-image-container {
+    height: 400px !important;
+  }
 }

@@ -25,7 +25,11 @@ type PlusOneForm = Pick<RsvpForm, "nom" | "prenom" | "regime"> & {
     age?: number;
 };
 
-export default function RsvpForm() {
+type RsvpFormProps = {
+  showCard?: boolean;
+};
+
+export default function RsvpForm({ showCard = false }: RsvpFormProps) {
   const [form, setForm] = useState<RsvpForm>({
     nom: "",
     prenom: "",
@@ -137,21 +141,9 @@ export default function RsvpForm() {
     }
   };
 
-  return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        width: '90%',
-        maxWidth: 600,
-        mx: "auto",
-        mt: 4,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
-    >
-      <Typography level="h3" sx={{ mb: 2, textAlign: "center" }}>
+  const formContent = (
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
         Confirmez votre présence
       </Typography>
 
@@ -290,6 +282,30 @@ export default function RsvpForm() {
       >
         Merci pour votre réponse !
       </Snackbar>
+    </Box>
+  );
+
+  if (showCard) {
+    return (
+      <div style={{
+        width: '100%',
+        maxWidth: '400px',
+        maxHeight: '100%',
+        overflowY: 'auto',
+        background: 'white',
+        borderRadius: '16px',
+        padding: '24px',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        border: '1px solid rgba(0, 0, 0, 0.05)'
+      }}>
+        {formContent}
+      </div>
+    );
+  }
+
+  return (
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: '400px', margin: '0 auto' }}>
+      {formContent}
     </Box>
   );
 }

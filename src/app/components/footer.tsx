@@ -1,27 +1,42 @@
 "use client";
 import Typography from '@mui/joy/Typography';
 import Box from '@mui/joy/Box';
+import Link from '@mui/joy/Link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
     <Box
       component="footer"
       sx={{
-        background: '#E8B5D4', // Rose moyen du faire-part, plus foncé que le fond principal
-        padding: '48px 24px 32px 24px',
+        background: 'var(--color-background-primary)', // Rose clair du faire-part, comme le reste du site
+        padding: '32px 24px 32px 24px',
         textAlign: 'center',
         marginTop: 'auto',
       }}
     >
-      <Typography level="body-md" sx={{ mb: 2, fontWeight: 'bold', color: '#DA363B' }}>
-        Laurent & Mathilde
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+        <Image
+          src="/logo_mariage.png"
+          alt="Laurent & Mathilde"
+          width={300}
+          height={120}
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
+      <Typography level="body-sm" sx={{ color: '#DA363B', mb: 1 }}>
+        📧 <Link href="mailto:giorgetti.mariage@gmail.com" sx={{ color: '#DA363B', textDecoration: 'underline' }}>
+          giorgetti.mariage@gmail.com
+        </Link> ou <Link href="mailto:mathildechristiaensss@gmail.com" sx={{ color: '#DA363B', textDecoration: 'underline' }}>
+          mathildechristiaensss@gmail.com
+        </Link>
       </Typography>
       <Typography level="body-sm" sx={{ color: '#DA363B', mb: 1 }}>
-        📧 giorgetti.mariage@gmail.com ou mathildechristiaensss@gmail.com
+        📱Mathilde - 07 50 88 90 70
       </Typography>
-      <Typography level="body-sm" sx={{ color: '#DA363B', mb: 1 }}>
-        📱 07 50 88 90 70
-      </Typography>
+        <Typography level="body-sm" sx={{ color: '#DA363B', mb: 4 }}>
+          📱Laurent - 06 40 17 33 52
+        </Typography>
       <Typography level="body-sm" sx={{ color: '#DA363B', mb: 4 }}>
         📍 Pourrières, France
       </Typography>

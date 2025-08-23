@@ -6,6 +6,7 @@
   --color-primary-accent: #DA363B; /* Rouge du texte du faire-part */
 
   /* Couleurs de fond */
+  --color-background-main: #ffffff; /* Fond principal blanc */
   --color-background-primary: #F9E0F5; /* Fond principal rose clair */
   --color-background-secondary: #E8B5D4; /* Fond secondaire rose moyen */
   --color-background-accent: #DA363B; /* Fond d'accent rouge */
@@ -13,6 +14,7 @@
   --color-background-dark: rgba(0, 0, 0, 0.1);
 
   /* Couleurs de texte */
+  --color-text-main: #000000; /* Texte principal noir */
   --color-text-primary: #DA363B; /* Texte principal rouge */
   --color-text-secondary: #E8B5D4; /* Texte secondaire rose moyen */
   --color-text-muted: #E8B5D4; /* Texte atténué rose moyen */

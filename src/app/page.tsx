@@ -6,6 +6,7 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Card from "@mui/joy/Card";
 import Footer from "./components/footer";
+import { IMAGES } from "./constants/images";
 
 export default function Home() {
   return (
@@ -21,11 +22,15 @@ export default function Home() {
       >
         <CardCover>
           <Image
-            src="/file.svg"
+            src={IMAGES.HOME_PICTURE}
             alt="Background"
             fill
             priority
-            style={{ objectFit: "cover" }}
+            style={{
+              objectFit: "cover",
+              objectPosition: "center 40%",
+              filter: "grayscale(100%)"
+            }}
           />
         </CardCover>
         <CardCover
@@ -36,18 +41,27 @@ export default function Home() {
         <CardContent
           sx={{
             position: "absolute",
-            top: "50%",
+            top: "70%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            color: "#DA363B", // Rouge du faire-part
-            fontSize: "3rem",
-            fontWeight: "bold",
-            textShadow: "0 2px 8px var(--color-shadow-text)",
             textAlign: "center",
             zIndex: 2,
+            width: "90%",
+            maxWidth: "600px",
           }}
         >
-          Laurent & Mathilde
+          <img
+            src={IMAGES.LOGO}
+            alt="Laurent & Mathilde"
+            style={{
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))',
+              width: '100%',
+              height: 'auto',
+              maxWidth: '750px',
+              maxHeight: '40vh'
+            }}
+          />
         </CardContent>
       </Card>
       <section
@@ -83,7 +97,7 @@ export default function Home() {
           >
             Merci de confirmer votre présence avant le{" "}
             <Typography component="span" sx={{ fontWeight: 'bold' }}>
-              1er mars 2026
+              1er Novembre 2025
             </Typography>.<br />
             Nous avons hâte de partager ce moment unique avec vous !
           </Typography>
@@ -92,8 +106,51 @@ export default function Home() {
           </Typography>
         </div>
         <AccommodationsCarousel />
-        <div style={{ maxWidth: 400, margin: '48px auto 0 auto' }}>
-          <RSVPForm />
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          height: '800px',
+          margin: '48px 0 0 0'
+        }}>
+          <img
+            src={IMAGES.FORM_BACKGROUND}
+            alt="Laurent & Mathilde"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
+          />
+          <div
+            className="form-overlay-desktop"
+            style={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+              width: '50%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '32px',
+              boxSizing: 'border-box'
+            }}
+          >
+            <RSVPForm showCard={true} />
+          </div>
+        </div>
+
+        {/* Formulaire mobile en dessous de la photo */}
+        <div
+          className="form-mobile"
+          style={{
+            display: 'none',
+            padding: '32px 24px',
+            background: 'var(--color-background-main)'
+          }}
+        >
+          <RSVPForm showCard={false} />
         </div>
       </section>
       <Footer />
