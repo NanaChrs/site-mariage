@@ -18,6 +18,7 @@ type RsvpForm = {
   prenom: string;
   regime: "omnivore" | "vegetarien" | "pescatarien";
   email: string;
+  age?: number;
   comment?: string;
 };
 
@@ -41,6 +42,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
   const [presence, setPresence] = useState<string>("");
   const [openModal, setOpenModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -82,7 +84,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
         diet: presence === "oui" ? form.regime : null,
         comment: form.comment || null,
         phone: null, // Pas de téléphone dans le formulaire actuel
-        age: null, // Pas d'âge pour la personne principale
+        age: form.age || null,
         isComing: presence === "oui"
       };
 
@@ -136,6 +138,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
       console.error('Erreur lors de l\'envoi:', error);
       setError(error instanceof Error ? error.message : 'Une erreur est survenue');
       setOpenModal(false);
+      setShowErrorToast(true);
     } finally {
       setIsLoading(false);
     }
@@ -146,12 +149,6 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
       <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
         Confirmez votre présence
       </Typography>
-
-      {error && (
-        <Alert color="danger" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      )}
 
       <Input
         placeholder="Nom"
@@ -187,67 +184,115 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
         onChange={(e) => handleChange("email", e.target.value)}
         disabled={submitted || presence !== "oui"}
       />
-      <Select
-        value={form.regime}
-        onChange={(_, value) => handleChange("regime", value)}
-        required
-        disabled={submitted || presence !== "oui"}
-      >
-        <Option value="omnivore">Omnivore</Option>
-        <Option value="vegetarien">Végétarien</Option>
-        <Option value="pescatarien">Pescatarien</Option>
-      </Select>
-      <Typography level="body-md" sx={{ mt: 2 }}>
-        Accompagnant (facultatif) :
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+        <Input
+          type="number"
+          placeholder="Âge"
+          required
+          value={form.age || ''}
+          onChange={(e) => handleChange("age", e.target.value)}
+          sx={{ flex: 1 }}
+          disabled={submitted || presence !== "oui"}
+        />
+        <Select
+          value={form.regime}
+          onChange={(_, value) => handleChange("regime", value)}
+          required
+          sx={{ flex: 1 }}
+          disabled={submitted || presence !== "oui"}
+          placeholder="Régime alimentaire"
+        >
+          <Option value="omnivore">Omnivore</Option>
+          <Option value="vegetarien">Végétarien</Option>
+          <Option value="pescatarien">Pescatarien</Option>
+        </Select>
+      </Stack>
+      <Typography level="body-md" sx={{ mt: 2, color: '#F6005E', fontWeight: 'bold' }}>
+        Accompagnant(s) (facultatif) :
+      </Typography>
+      <Typography level="body-sm" sx={{ fontStyle: 'italic', color: 'text.secondary', mb: 2 }}>
+        Renseigner les accompagnants avec leurs nom, prénom, âge et régime alimentaire nous aidera fortement pour l'organisation du mariage. Sans remplir ce champ nous considèrerons que vous venez seul.
       </Typography>
       {plusOnes.map((a, idx) => (
-        <Stack direction="row" spacing={1} alignItems="center" key={idx}>
-          <Input
-            placeholder="Nom de l'accompagnant"
-            required
-            value={a.nom}
-            onChange={(e) => handlePlusOnesChange(idx, 'nom', e.target.value)}
-            sx={{ flex: 1 }}
-            disabled={submitted || presence !== "oui"}
-          />
-          <Input
-            placeholder="Prénom de l'accompagnant"
-            required
-            value={a.prenom}
-            onChange={(e) => handlePlusOnesChange(idx, 'prenom', e.target.value)}
-            sx={{ flex: 1 }}
-            disabled={submitted || presence !== "oui"}
-          />
-          <Input
-            type="number"
-            placeholder="Âge"
-            required
-            value={a.age}
-            onChange={(e) => handlePlusOnesChange(idx, 'age', e.target.value)}
-            sx={{ width: 80 }}
-            disabled={submitted || presence !== "oui"}
-          />
-          <Select
-            value={a.regime}
-            onChange={(_, value) => handlePlusOnesChange(idx, 'regime', value as string)}
-            required
-            sx={{ minWidth: 120 }}
-            disabled={submitted || presence !== "oui"}
-          >
-            <Option value="omnivore">Omnivore</Option>
-            <Option value="vegetarien">Végétarien</Option>
-            <Option value="pescatarien">Pescatarien</Option>
-          </Select>
-          <IconButton color="danger" onClick={() => removePlusOnes(idx)} disabled={submitted || presence !== "oui"}>
-            <DeleteIcon />
-          </IconButton>
-        </Stack>
+        <Box key={idx} sx={{
+          border: '1px solid',
+          borderColor: 'divider',
+          borderRadius: 'md',
+          p: 2,
+          mt: 2,
+          backgroundColor: 'background.level1'
+        }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+            <Typography level="body-sm" fontWeight="md">
+              Accompagnant {idx + 1}
+            </Typography>
+            <IconButton
+              color="danger"
+              size="sm"
+              onClick={() => removePlusOnes(idx)}
+              disabled={submitted || presence !== "oui"}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
+
+          <Stack spacing={2}>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+              <Input
+                placeholder="Nom"
+                required
+                value={a.nom}
+                onChange={(e) => handlePlusOnesChange(idx, 'nom', e.target.value)}
+                sx={{ flex: 1 }}
+                disabled={submitted || presence !== "oui"}
+              />
+              <Input
+                placeholder="Prénom"
+                required
+                value={a.prenom}
+                onChange={(e) => handlePlusOnesChange(idx, 'prenom', e.target.value)}
+                sx={{ flex: 1 }}
+                disabled={submitted || presence !== "oui"}
+              />
+            </Stack>
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+              <Input
+                type="number"
+                placeholder="Âge"
+                required
+                value={a.age || ''}
+                onChange={(e) => handlePlusOnesChange(idx, 'age', e.target.value)}
+                sx={{ flex: 1 }}
+                disabled={submitted || presence !== "oui"}
+              />
+              <Select
+                value={a.regime}
+                onChange={(_, value) => handlePlusOnesChange(idx, 'regime', value as string)}
+                required
+                sx={{ flex: 1 }}
+                disabled={submitted || presence !== "oui"}
+                placeholder="Régime alimentaire"
+              >
+                <Option value="omnivore">Omnivore</Option>
+                <Option value="vegetarien">Végétarien</Option>
+                <Option value="pescatarien">Pescatarien</Option>
+              </Select>
+            </Stack>
+          </Stack>
+        </Box>
       ))}
-      <Button variant="soft" color="neutral" onClick={addPlusOnes} sx={{ alignSelf: 'flex-start' }} disabled={submitted || presence !== "oui"}>
-        Ajouter un plusOnes
+      <Button
+        variant="soft"
+        color="neutral"
+        onClick={addPlusOnes}
+        sx={{ alignSelf: 'flex-start', borderRadius: 'xl' }}
+        disabled={submitted || presence !== "oui"}
+      >
+        + Ajouter un accompagnant
       </Button>
-      <Typography level="body-sm" sx={{ fontStyle: 'italic', mb: 1 }}>
-        Merci d&apos;indiquer le régime alimentaire de chaque personne. Vous pouvez ajouter un commentaire ou une note spéciale ci-dessous si besoin.
+      <Typography level="body-sm" sx={{ fontStyle: 'italic', mb: 1, mt: 2 }}>
+        Vous pouvez ajouter un commentaire ou une note spéciale ci-dessous si besoin.
       </Typography>
       <Input
         placeholder="Commentaire ou note spéciale (facultatif)"
@@ -262,6 +307,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
         color="primary"
         disabled={!presence || submitted || isLoading}
         loading={isLoading}
+        sx={{ borderRadius: 'xl' }}
       >
         {isLoading ? 'Envoi en cours...' : 'Envoyer'}
       </Button>
@@ -272,6 +318,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
         onConfirm={handleConfirmSubmit}
         mainPerson={{ nom: form.nom, prenom: form.prenom }}
         plusOnes={plusOnes}
+        isLoading={isLoading}
       />
 
       <Snackbar
@@ -282,6 +329,15 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
       >
         Merci pour votre réponse !
       </Snackbar>
+
+      <Snackbar
+        open={showErrorToast}
+        onClose={() => setShowErrorToast(false)}
+        autoHideDuration={5000}
+        color="danger"
+      >
+        {error}
+      </Snackbar>
     </Box>
   );
 
@@ -289,7 +345,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
     return (
       <div style={{
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '500px',
         maxHeight: '100%',
         overflowY: 'auto',
         background: 'white',
@@ -304,7 +360,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: '400px', margin: '0 auto' }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: '500px', margin: '0 auto' }}>
       {formContent}
     </Box>
   );

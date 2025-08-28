@@ -6,6 +6,11 @@ const customTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
+        text: {
+          primary: '#000000',    // Texte noir par défaut
+          secondary: '#000000',  // Texte secondaire aussi noir
+          tertiary: '#666666',   // Texte atténué gris
+        },
         primary: {
           50: '#F9E0F5',   // Rose clair du faire-part
           100: '#F9E0F5',  // Rose clair du faire-part
@@ -23,36 +28,36 @@ const customTheme = extendTheme({
           100: '#F9E0F5',
           200: '#F9E0F5',
           300: '#E8B5D4',
-          400: '#E8B5D4',
-          500: '#DA363B',  // Rouge du faire-part
-          600: '#DA363B',
-          700: '#DA363B',
-          800: '#DA363B',
-          900: '#DA363B',
+          400: '#F6005E',
+          500: '#F6005E',  // Rose pour les erreurs
+          600: '#F6005E',
+          700: '#F6005E',
+          800: '#F6005E',
+          900: '#F6005E',
         },
         warning: {
           50: '#F9E0F5',
           100: '#F9E0F5',
           200: '#F9E0F5',
           300: '#E8B5D4',
-          400: '#E8B5D4',
-          500: '#DA363B',  // Rouge du faire-part
-          600: '#DA363B',
-          700: '#DA363B',
-          800: '#DA363B',
-          900: '#DA363B',
+          400: '#F6005E',
+          500: '#F6005E',  // Rose pour les warnings
+          600: '#F6005E',
+          700: '#F6005E',
+          800: '#F6005E',
+          900: '#F6005E',
         },
         success: {
           50: '#F9E0F5',
           100: '#F9E0F5',
           200: '#F9E0F5',
           300: '#E8B5D4',
-          400: '#E8B5D4',
-          500: '#DA363B',  // Rouge du faire-part
-          600: '#DA363B',
-          700: '#DA363B',
-          800: '#DA363B',
-          900: '#DA363B',
+          400: '#F6005E',
+          500: '#F6005E',  // Rose pour le succès
+          600: '#F6005E',
+          700: '#F6005E',
+          800: '#F6005E',
+          900: '#F6005E',
         },
       },
     },
@@ -61,10 +66,10 @@ const customTheme = extendTheme({
     JoyInput: {
       styleOverrides: {
         root: {
-          '--Input-focusedHighlight': '#DA363B',
+          '--Input-focusedHighlight': '#F6005E',
           '--Input-focusedThickness': '2px',
           '&:focus-within': {
-            borderColor: '#DA363B',
+            borderColor: '#F6005E',
             boxShadow: '0 0 0 2px rgba(218, 54, 59, 0.2)',
           },
         },
@@ -73,10 +78,10 @@ const customTheme = extendTheme({
     JoySelect: {
       styleOverrides: {
         root: {
-          '--Select-focusedHighlight': '#DA363B',
+          '--Select-focusedHighlight': '#F6005E',
           '--Select-focusedThickness': '2px',
           '&:focus-within': {
-            borderColor: '#DA363B',
+            borderColor: '#F6005E',
             boxShadow: '0 0 0 2px rgba(218, 54, 59, 0.2)',
           },
         },
@@ -87,17 +92,17 @@ const customTheme = extendTheme({
         root: ({ theme, ownerState }) => ({
           ...(ownerState.color === 'primary' && {
             backgroundColor: '#E8B5D4', /* Boutons en rose moyen - même couleur que le footer */
-            color: '#DA363B', /* Texte des boutons en rouge */
+            color: '#F6005E', /* Texte des boutons en rouge */
             '&:hover': {
-              backgroundColor: '#DA363B', /* Hover en rouge */
+              backgroundColor: '#F6005E', /* Hover en rouge */
               color: '#ffffff', /* Texte blanc au hover */
             },
           }),
           ...(ownerState.color === 'primary' && ownerState.variant === 'soft' && {
             backgroundColor: '#E8B5D4', /* Boutons soft en rose moyen - même couleur que le footer */
-            color: '#DA363B', /* Texte en rouge */
+            color: '#F6005E', /* Texte en rouge */
             '&:hover': {
-              backgroundColor: '#DA363B', /* Hover en rouge */
+              backgroundColor: '#F6005E', /* Hover en rouge */
               color: '#ffffff', /* Texte blanc au hover */
             },
           }),
@@ -107,16 +112,30 @@ const customTheme = extendTheme({
     JoyTypography: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
-          // Tous les textes en rouge du faire-part
-          color: '#DA363B',
-          // Tous les titres h2 et h3 en rouge du faire-part avec même taille
+          // Texte noir par défaut
+          color: '#000000',
+          // Titres h1, h2, h3, h4 en rose #F6005E
+          ...(ownerState.level === 'h1' && {
+            color: '#F6005E',
+            fontWeight: 'bold',
+          }),
           ...(ownerState.level === 'h2' && {
-            color: '#DA363B',
+            color: '#F6005E',
+            fontWeight: 'bold',
             fontSize: '1.5rem',
           }),
           ...(ownerState.level === 'h3' && {
-            color: '#DA363B',
+            color: '#F6005E',
+            fontWeight: 'bold',
             fontSize: '1.5rem',
+          }),
+          ...(ownerState.level === 'h4' && {
+            color: '#F6005E',
+            fontWeight: 'bold',
+          }),
+          // Textes avec fontWeight bold en rose #F6005E
+          ...(ownerState.sx?.fontWeight === 'bold' && {
+            color: '#F6005E',
           }),
         }),
       },

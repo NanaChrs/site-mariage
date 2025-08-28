@@ -3,26 +3,27 @@
   /* Couleurs principales du faire-part */
   --color-primary-light: #F9E0F5; /* Rose clair du fond rayé */
   --color-primary-medium: #E8B5D4; /* Rose moyen du fond rayé */
-  --color-primary-accent: #DA363B; /* Rouge du texte du faire-part */
+  --color-primary-accent: #F6005E; /* Rouge du texte du faire-part */
 
   /* Couleurs de fond */
   --color-background-main: #ffffff; /* Fond principal blanc */
-  --color-background-primary: #F9E0F5; /* Fond principal rose clair */
+  --color-background-primary: #ffffff; /* Fond principal blanc */
   --color-background-secondary: #E8B5D4; /* Fond secondaire rose moyen */
-  --color-background-accent: #DA363B; /* Fond d'accent rouge */
+  --color-background-accent: #F6005E; /* Fond d'accent rouge */
   --color-background-white: #ffffff;
   --color-background-dark: rgba(0, 0, 0, 0.1);
 
   /* Couleurs de texte */
   --color-text-main: #000000; /* Texte principal noir */
-  --color-text-primary: #DA363B; /* Texte principal rouge */
-  --color-text-secondary: #E8B5D4; /* Texte secondaire rose moyen */
-  --color-text-muted: #E8B5D4; /* Texte atténué rose moyen */
+  --color-text-primary: #000000; /* Texte principal noir */
+  --color-text-secondary: #000000; /* Texte secondaire noir */
+  --color-text-muted: #666666; /* Texte atténué gris */
   --color-text-on-dark: #ffffff;
-  --color-text-on-light: #DA363B;
+  --color-text-on-light: #000000;
+  --color-text-bold: #F6005E; /* Rose pour les textes en gras et titres */
 
   /* Couleurs d'overlay et assombrissement */
-  --color-overlay-light: rgba(0, 0, 0, 0.3); /* Overlay noir léger */
+  --color-overlay-light: rgba(0, 0, 0, 0.2); /* Overlay sombre pour les images */
   --color-overlay-medium: rgba(0, 0, 0, 0.5); /* Overlay noir moyen */
   --color-overlay-strong: rgba(0, 0, 0, 0.7); /* Overlay noir fort */
   --color-overlay-gradient-bottom: rgba(0, 0, 0, 0.6); /* Gradient noir pour lisibilité */
@@ -34,15 +35,15 @@
   --color-shadow-text: rgba(0, 0, 0, 0.5); /* Ombre de texte neutre pour lisibilité */
 
   /* Couleurs des boutons et interactions */
-  --color-button-primary: #DA363B; /* Boutons rouge accent */
+  --color-button-primary: #F6005E; /* Boutons rouge accent */
   --color-button-secondary: #E8B5D4; /* Boutons secondaires rose moyen */
   --color-button-text: #ffffff; /* Texte des boutons blanc */
   --color-pagination-bullet: #E8B5D4; /* Pagination inactive rose moyen */
-  --color-pagination-active: #DA363B; /* Pagination active rouge */
-  --color-navigation: #DA363B; /* Navigation rouge accent */
+  --color-pagination-active: #F6005E; /* Pagination active rouge */
+  --color-navigation: #F6005E; /* Navigation rouge accent */
 
   /* Couleurs Material UI (pour cohérence) */
   --mui-text-muted: #E8B5D4; /* Rose moyen pour texte atténué */
-  --mui-text-copyright: #DA363B; /* Rouge pour copyright */
+  --mui-text-copyright: #F6005E; /* Rouge pour copyright */
   --mui-background-light: #F9E0F5; /* Fond clair rose */
 }

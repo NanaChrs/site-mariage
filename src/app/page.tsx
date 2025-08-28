@@ -2,44 +2,46 @@ import Image from "next/image";
 import AccommodationsCarousel from "./components/accommodations";
 import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
-import CardCover from "@mui/joy/CardCover";
-import CardContent from "@mui/joy/CardContent";
-import Card from "@mui/joy/Card";
 import Footer from "./components/footer";
 import { IMAGES } from "./constants/images";
 
 export default function Home() {
   return (
-    <>
-      <Card
-        sx={{
+    <div style={{ margin: 0, padding: 0 }}>
+      <section
+        style={{
           position: "relative",
           width: "100vw",
           height: "100vh",
           overflow: "hidden",
-          borderRadius: 0,
+          margin: 0,
+          padding: 0,
         }}
       >
-        <CardCover>
-          <Image
-            src={IMAGES.HOME_PICTURE}
-            alt="Background"
-            fill
-            priority
-            style={{
-              objectFit: "cover",
-              objectPosition: "center 40%",
-              filter: "grayscale(100%)"
-            }}
-          />
-        </CardCover>
-        <CardCover
-          sx={{
-            background: "var(--color-overlay-light)",
+        <Image
+          src={IMAGES.HOME_PICTURE}
+          alt="Background"
+          fill
+          priority
+          style={{
+            objectFit: "cover",
+            objectPosition: "center 40%",
+            filter: "grayscale(100%)"
           }}
         />
-        <CardContent
-          sx={{
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "var(--color-overlay-light)",
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
             position: "absolute",
             top: "70%",
             left: "50%",
@@ -62,8 +64,8 @@ export default function Home() {
               maxHeight: '40vh'
             }}
           />
-        </CardContent>
-      </Card>
+        </div>
+      </section>
       <section
         style={{
           position: "relative",
@@ -154,6 +156,6 @@ export default function Home() {
         </div>
       </section>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -24,23 +24,23 @@ export default function Footer() {
           style={{ objectFit: 'contain' }}
         />
       </Box>
-      <Typography level="body-sm" sx={{ color: '#DA363B', mb: 1 }}>
-        📧 <Link href="mailto:giorgetti.mariage@gmail.com" sx={{ color: '#DA363B', textDecoration: 'underline' }}>
+      <Typography level="body-sm" sx={{ mb: 1 }}>
+        📧 <Link href="mailto:giorgetti.mariage@gmail.com" sx={{ color: 'var(--color-background-accent)', textDecoration: 'underline' }}>
           giorgetti.mariage@gmail.com
-        </Link> ou <Link href="mailto:mathildechristiaensss@gmail.com" sx={{ color: '#DA363B', textDecoration: 'underline' }}>
+        </Link> ou <Link href="mailto:mathildechristiaensss@gmail.com" sx={{ color: 'var(--color-background-accent)', textDecoration: 'underline' }}>
           mathildechristiaensss@gmail.com
         </Link>
       </Typography>
-      <Typography level="body-sm" sx={{ color: '#DA363B', mb: 1 }}>
+      <Typography level="body-sm" sx={{ mb: 1 }}>
         📱Mathilde - 07 50 88 90 70
       </Typography>
-        <Typography level="body-sm" sx={{ color: '#DA363B', mb: 4 }}>
+        <Typography level="body-sm" sx={{ mb: 4 }}>
           📱Laurent - 06 40 17 33 52
         </Typography>
-      <Typography level="body-sm" sx={{ color: '#DA363B', mb: 4 }}>
+      <Typography level="body-sm" sx={{ mb: 4 }}>
         📍 Pourrières, France
       </Typography>
-      <Typography level="body-xs" sx={{ color: '#DA363B' }}>
+      <Typography level="body-xs">
         © 2025 Laurent & Mathilde - Mariage du 29 août 2026
       </Typography>
     </Box>
