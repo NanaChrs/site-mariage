@@ -1,8 +1,8 @@
 import Image from "next/image";
-import AccommodationsCarousel from "./components/accommodations";
 import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
 import Footer from "./components/footer";
+import ComingSoon from "./components/coming-soon";
 import { IMAGES } from "./constants/images";
 
 export default function Home() {
@@ -107,12 +107,22 @@ export default function Home() {
             Vous trouverez plus d'informations sur le site : suggestions de logements sur place, dress code et formulaire pour confirmer votre présence.
           </Typography>
         </div>
-        <AccommodationsCarousel />
+
+        <ComingSoon
+          title="Suggestions de logements"
+          description="Nous préparons une sélection de logements à proximité du château pour faciliter votre séjour."
+        />
+
+        <ComingSoon
+          title="Dress Code"
+          description="Toutes les informations concernant la tenue recommandée pour notre mariage."
+        />
+
         <div style={{
           position: 'relative',
           width: '100%',
-          height: '800px',
-          margin: '48px 0 0 0'
+          height: '950px', // Augmenté de 800px à 1000px
+          margin: '32px 0 0 0'
         }}>
           <img
             src={IMAGES.FORM_BACKGROUND}
@@ -121,7 +131,7 @@ export default function Home() {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center'
+              objectPosition: 'center 70%'
             }}
           />
           <div
@@ -135,7 +145,7 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '32px',
+              padding: '20px', // Réduit de 32px à 20px
               boxSizing: 'border-box'
             }}
           >

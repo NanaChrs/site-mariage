@@ -345,12 +345,12 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
     return (
       <div style={{
         width: '100%',
-        maxWidth: '500px',
-        maxHeight: '100%',
+        maxWidth: '550px', // Augmenté de 500px à 550px
+        maxHeight: '95%', // Ajouté pour s'assurer que ça rentre dans la zone
         overflowY: 'auto',
         background: 'white',
         borderRadius: '16px',
-        padding: '24px',
+        padding: '20px', // Réduit de 24px à 20px pour plus de compacité
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         border: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
