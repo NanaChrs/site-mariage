@@ -64,9 +64,12 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted, presence:', presence); // Debug log
     if (presence === "oui") {
+      console.log('Opening modal...'); // Debug log
       setOpenModal(true);
     } else {
+      console.log('Direct submit...'); // Debug log
       handleConfirmSubmit();
     }
   };
@@ -145,7 +148,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
   };
 
   const formContent = (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
         Confirmez votre présence
       </Typography>
@@ -297,7 +300,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
       <Input
         placeholder="Commentaire ou note spéciale (facultatif)"
         value={form.comment || ""}
-        onChange={(e) => handleChange("commentaire", e.target.value)}
+        onChange={(e) => handleChange("comment", e.target.value)}
         sx={{ mb: 1 }}
         disabled={submitted}
       />
@@ -345,16 +348,18 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
     return (
       <div style={{
         width: '100%',
-        maxWidth: '550px', // Augmenté de 500px à 550px
-        maxHeight: '95%', // Ajouté pour s'assurer que ça rentre dans la zone
+        maxWidth: '550px',
+        maxHeight: '95%',
         overflowY: 'auto',
         background: 'white',
         borderRadius: '16px',
-        padding: '20px', // Réduit de 24px à 20px pour plus de compacité
+        padding: '20px',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         border: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
-        {formContent}
+        <form onSubmit={handleSubmit}>
+          {formContent}
+        </form>
       </div>
     );
   }

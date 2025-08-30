@@ -132,11 +132,7 @@ const customTheme = extendTheme({
           ...(ownerState.level === 'h4' && {
             color: '#F6005E',
             fontWeight: 'bold',
-          }),
-          // Textes avec fontWeight bold en rose #F6005E
-          ...(ownerState.sx?.fontWeight === 'bold' && {
-            color: '#F6005E',
-          }),
+          })
         }),
       },
     },

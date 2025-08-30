@@ -1,14 +1,8 @@
 import React from 'react';
-import Modal from '@mui/joy/Modal';
-import ModalDialog from '@mui/joy/ModalDialog';
-import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
 import Stack from '@mui/joy/Stack';
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import Circle from '@mui/icons-material/Circle';
+import Box from '@mui/joy/Box';
 
 interface ConfirmationModalProps {
   open: boolean;
@@ -27,27 +21,60 @@ export default function ConfirmationModal({
   plusOnes,
   isLoading = false
 }: ConfirmationModalProps) {
+  if (!open) return null;
+
   return (
-    <Modal open={open} onClose={onClose}>
-      <ModalDialog
-        aria-labelledby="confirmation-title"
-        aria-describedby="confirmation-desc"
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+      }}
+      onClick={onClose}
+    >
+      <Box
+        onClick={(e) => e.stopPropagation()}
         sx={{
-          maxWidth: 500,
-          borderRadius: 'xl',
-          p: 3,
+          backgroundColor: 'white',
+          borderRadius: '16px',
+          padding: '24px',
+          maxWidth: '90vw',
+          maxHeight: '80vh',
+          overflow: 'auto',
+          position: 'relative',
         }}
       >
-        <ModalClose />
-        <Typography
-          id="confirmation-title"
-          level="h4"
-          sx={{ mb: 2, textAlign: 'center', color: '#F6005E', fontWeight: 'bold' }}
+        {/* Bouton fermer */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            background: 'none',
+            border: 'none',
+            fontSize: '24px',
+            cursor: 'pointer',
+            padding: '8px',
+            lineHeight: 1,
+          }}
         >
+          ×
+        </button>
+
+        <Typography level="h4" sx={{ mb: 2, textAlign: 'center', color: '#F6005E', fontWeight: 'bold' }}>
           Confirmer votre réponse
         </Typography>
 
-        <Typography id="confirmation-desc" sx={{ mb: 3, textAlign: 'center', color: 'black' }}>
+        <Typography sx={{ mb: 3, textAlign: 'center', color: 'black' }}>
           Veuillez vérifier les informations suivantes avant de confirmer :
         </Typography>
 
@@ -55,45 +82,25 @@ export default function ConfirmationModal({
           Personnes présentes :
         </Typography>
 
-        <List
-          sx={{
-            '--List-radius': '8px',
-            '--List-padding': '8px',
-            '--ListItem-paddingY': '6px',
-            mb: 3
-          }}
-        >
-          <ListItem>
-            <ListItemDecorator>
-              <Circle sx={{ fontSize: 8, color: 'primary.500' }} />
-            </ListItemDecorator>
-            <Typography level="body-md" sx={{ color: 'black' }}>
-              {mainPerson.prenom} {mainPerson.nom}
-            </Typography>
-          </ListItem>
+        <Box sx={{ mb: 3 }}>
+          <Typography level="body-md" sx={{ color: 'black', mb: 1 }}>
+            • {mainPerson.prenom} {mainPerson.nom}
+          </Typography>
 
           {plusOnes.map((person, index) => (
-            <ListItem key={index}>
-              <ListItemDecorator>
-                <Circle sx={{ fontSize: 8, color: 'primary.500' }} />
-              </ListItemDecorator>
-              <Typography level="body-md" sx={{ color: 'black' }}>
-                {person.prenom} {person.nom}
-              </Typography>
-            </ListItem>
+            <Typography key={index} level="body-md" sx={{ color: 'black', mb: 1 }}>
+              • {person.prenom} {person.nom}
+            </Typography>
           ))}
-        </List>
+        </Box>
 
-        <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end' }}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button
             variant="outlined"
             color="neutral"
             onClick={onClose}
             disabled={isLoading}
-            sx={{
-              borderRadius: 'xl',
-              px: 3
-            }}
+            sx={{ borderRadius: 'xl', flex: 1 }}
           >
             Annuler
           </Button>
@@ -102,15 +109,12 @@ export default function ConfirmationModal({
             color="primary"
             onClick={onConfirm}
             loading={isLoading}
-            sx={{
-              borderRadius: 'xl',
-              px: 3
-            }}
+            sx={{ borderRadius: 'xl', flex: 1 }}
           >
             {isLoading ? 'Envoi en cours...' : 'Confirmer'}
           </Button>
         </Stack>
-      </ModalDialog>
-    </Modal>
+      </Box>
+    </div>
   );
 }

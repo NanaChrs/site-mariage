@@ -9,7 +9,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        background: 'var(--color-background-primary)', // Rose clair du faire-part, comme le reste du site
+        background: 'var(--color-background-primary)',
         padding: '32px 24px 32px 24px',
         textAlign: 'center',
         marginTop: 'auto',
