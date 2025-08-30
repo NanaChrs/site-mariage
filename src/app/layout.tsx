@@ -4,7 +4,7 @@ import "./styles/globals.css";
 import "./styles/colors.css";
 
 export const metadata: Metadata = {
-  title: "Laurent & Mathilde - Mariage",
+  title: "Mathilde & Laurent - Mariage",
   description: "Site de mariage de Laurent & Mathilde - 29 août 2026",
   icons: {
     icon: '/favicon.ico',
