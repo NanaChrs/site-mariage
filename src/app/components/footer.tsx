@@ -9,7 +9,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        background: 'var(--color-background-primary)',
+        background: 'var(--mui-background-light)',
         padding: '32px 24px 32px 24px',
         textAlign: 'center',
         marginTop: 'auto',
@@ -34,13 +34,10 @@ export default function Footer() {
       <Typography level="body-sm" sx={{ mb: 1 }}>
         📱Mathilde - 07 50 88 90 70
       </Typography>
-        <Typography level="body-sm" sx={{ mb: 4 }}>
-          📱Laurent - 06 40 17 33 52
-        </Typography>
       <Typography level="body-sm" sx={{ mb: 4 }}>
         📍 Pourrières, France
       </Typography>
-      <Typography level="body-xs">
+      <Typography level="body-xs" sx={{ color: 'text.tertiary' }}>
         © 2025 Laurent & Mathilde - Mariage du 29 août 2026
       </Typography>
     </Box>
