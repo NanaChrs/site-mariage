@@ -3,6 +3,7 @@ import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
 import Footer from "./components/footer";
 import ComingSoon from "./components/coming-soon";
+import DressCode from "./components/dress-code";
 import { IMAGES } from "./constants/images";
 
 export default function Home() {
@@ -113,10 +114,7 @@ export default function Home() {
           description="Nous préparons une sélection de logements à proximité du château pour faciliter votre séjour."
         />
 
-        <ComingSoon
-          title="Dress Code"
-          description="Toutes les informations concernant la tenue recommandée pour notre mariage."
-        />
+        <DressCode />
 
         <div style={{
           position: 'relative',

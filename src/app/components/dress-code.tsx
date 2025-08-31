@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 
-export default function ComingSoon({ title, description }: { title: string; description?: string }) {
+export default function DressCode() {
   return (
     <Box sx={{ mb: 6, px: 3 }}>
       <Typography
@@ -16,7 +16,7 @@ export default function ComingSoon({ title, description }: { title: string; desc
           fontWeight: 'normal'
         }}
       >
-        {title}
+        Dress code
       </Typography>
 
       <Card
@@ -27,20 +27,18 @@ export default function ComingSoon({ title, description }: { title: string; desc
           py: 4,
           px: 3,
           backgroundColor: 'primary.50',
-          border: '2px dashed',
+          border: '2px solid',
           borderColor: 'primary.300',
         }}
       >
         <CardContent>
           <Typography level="h3" sx={{ mb: 2 }}>
-            🚧 Bientôt disponible
+            🎩 Informations à venir
           </Typography>
 
-          {description && (
-            <Typography level="body-md" sx={{ color: 'text.secondary' }}>
-              {description}
-            </Typography>
-          )}
+          <Typography level="body-md" sx={{ color: 'text.secondary' }}>
+            Les détails concernant la tenue recommandée pour notre mariage seront bientôt disponibles.
+          </Typography>
 
           <Typography level="body-sm" sx={{ mt: 2, fontStyle: 'italic', color: 'text.tertiary' }}>
             Cette section sera mise à jour prochainement avec toutes les informations nécessaires.
