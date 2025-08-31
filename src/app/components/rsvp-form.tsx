@@ -185,7 +185,7 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
         required
         value={form.email}
         onChange={(e) => handleChange("email", e.target.value)}
-        disabled={submitted || presence !== "oui"}
+        disabled={submitted}
       />
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
         <Input
