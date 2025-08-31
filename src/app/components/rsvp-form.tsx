@@ -149,7 +149,16 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
 
   const formContent = (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
+      <Typography
+        level="h2"
+        sx={{
+          mb: 3,
+          textAlign: "center",
+          fontFamily: 'hijrnotes, "Times New Roman", Georgia, serif',
+          fontSize: { xs: '2rem', sm: '2.5rem' },
+          fontWeight: 'normal'
+        }}
+      >
         Confirmez votre présence
       </Typography>
 

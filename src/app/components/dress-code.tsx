@@ -1,7 +1,6 @@
 import Typography from "@mui/joy/Typography";
 import Box from "@mui/joy/Box";
-import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
+import { IMAGES } from "../constants/images";
 
 export default function DressCode() {
   return (
@@ -19,32 +18,26 @@ export default function DressCode() {
         Dress code
       </Typography>
 
-      <Card
-        sx={{
-          maxWidth: 600,
-          margin: '0 auto',
-          textAlign: 'center',
-          py: 4,
-          px: 3,
-          backgroundColor: 'primary.50',
-          border: '2px solid',
-          borderColor: 'primary.300',
-        }}
-      >
-        <CardContent>
-          <Typography level="h3" sx={{ mb: 2 }}>
-            🎩 Informations à venir
+      <Box sx={{ maxWidth: 600, margin: '0 auto', textAlign: 'center', py: 2 }}>
+        <Typography level="body-lg" sx={{ mb: 3, lineHeight: 1.6 }}>
+            Vous êtes déjà magnifiques, mais pour ce grand jour, on vous invite à sortir vos plus belles tenues !
+        </Typography>
+
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+          <img
+            src={IMAGES.COLOR_PALETTE}
+            alt="Palette de couleurs du mariage"
+            style={{
+              maxWidth: '100%',
+              height: 'auto',
+            }}
+          />
+        </Box>
+          <Typography level="body-md" sx={{ mb: 3, fontStyle: 'italic' }}>
+              Voici nos couleurs… à utiliser seulement si ça vous amuse !
           </Typography>
 
-          <Typography level="body-md" sx={{ color: 'text.secondary' }}>
-            Les détails concernant la tenue recommandée pour notre mariage seront bientôt disponibles.
-          </Typography>
-
-          <Typography level="body-sm" sx={{ mt: 2, fontStyle: 'italic', color: 'text.tertiary' }}>
-            Cette section sera mise à jour prochainement avec toutes les informations nécessaires.
-          </Typography>
-        </CardContent>
-      </Card>
+      </Box>
     </Box>
   );
 }
