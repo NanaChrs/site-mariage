@@ -17,7 +17,7 @@ const sql = neon(process.env.DATABASE_URL!);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-
+    
     // Validation des champs requis
     if (!body.name || !body.firstname) {
       return NextResponse.json(
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       const existingUser = await sql`
         SELECT id FROM people WHERE email = ${email}
       `;
-
+      
       if (existingUser.length > 0) {
         return NextResponse.json(
           { error: 'Cette adresse email est déjà enregistrée' },
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     const insertedId = result[0]?.id;
 
     return NextResponse.json(
-      {
+      { 
         message: 'RSVP enregistré avec succès',
         id: insertedId,
         person: {
@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Erreur lors de l\'enregistrement RSVP:', error);
-
+    
     // Gestion des erreurs spécifiques de la base de données
     if (error instanceof Error) {
       if (error.message.includes('unique constraint')) {
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
           { status: 409 }
         );
       }
-
+      
       if (error.message.includes('does not exist')) {
         return NextResponse.json(
           { error: 'Erreur de configuration de la base de données' },

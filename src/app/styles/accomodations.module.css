@@ -1,3 +1,7 @@
+.accomodationsSection {
+  padding: 40px 20px 80px 20px;
+}
+
 .carouselItem {
   position: relative;
   display: flex;
@@ -66,7 +70,8 @@
 /* Styles pour Swiper avec variables CSS synchronisées */
 .mySwiper {
   position: relative;
-  padding-bottom: 40px;
+  padding: 0 80px 40px 80px;
+  overflow: hidden;
 }
 
 .mySwiper :global(.swiper-pagination) {
@@ -89,4 +94,35 @@
 .mySwiper :global(.swiper-button-next),
 .mySwiper :global(.swiper-button-prev) {
   color: var(--color-navigation);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  margin-top: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mySwiper :global(.swiper-button-next) {
+  right: 20px;
+}
+
+.mySwiper :global(.swiper-button-prev) {
+  left: 20px;
+}
+
+.mySwiper :global(.swiper-button-next:after),
+.mySwiper :global(.swiper-button-prev:after) {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .mySwiper {
+    padding: 0 20px 40px 20px;
+  }
+
+  .mySwiper :global(.swiper-button-next),
+  .mySwiper :global(.swiper-button-prev) {
+    display: none;
+  }
 }

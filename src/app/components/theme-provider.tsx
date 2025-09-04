@@ -120,9 +120,10 @@ const customTheme = extendTheme({
             fontWeight: 'bold',
           }),
           ...(ownerState.level === 'h2' && {
-            color: '#F6005E',
-            fontWeight: 'bold',
-            fontSize: '1.5rem',
+            color: '#F6005E !important',
+            fontFamily: 'hijrnotes, "Times New Roman", Georgia, serif',
+            fontSize: '3.5rem !important',
+            fontWeight: 'normal !important'
           }),
           ...(ownerState.level === 'h3' && {
             color: '#F6005E',

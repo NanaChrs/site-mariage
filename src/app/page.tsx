@@ -2,7 +2,7 @@ import Image from "next/image";
 import RSVPForm from "./components/rsvp-form";
 import Typography from "@mui/joy/Typography";
 import Footer from "./components/footer";
-import ComingSoon from "./components/coming-soon";
+import Accommodations from "./components/accommodations";
 import DressCode from "./components/dress-code";
 import { IMAGES } from "./constants/images";
 
@@ -109,10 +109,7 @@ export default function Home() {
           </Typography>
         </div>
 
-        <ComingSoon
-          title="Suggestions de logements"
-          description="Nous préparons une sélection de logements à proximité du château pour faciliter votre séjour."
-        />
+        <Accommodations />
 
         <DressCode />
 

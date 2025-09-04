@@ -11,7 +11,6 @@ import IconButton from "@mui/joy/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConfirmationModal from "./confirmation-modal";
 import Snackbar from "@mui/joy/Snackbar";
-import Alert from "@mui/joy/Alert";
 
 type RsvpForm = {
   nom: string;
@@ -79,7 +78,6 @@ export default function RsvpForm({ showCard = false }: RsvpFormProps) {
     setError(null);
 
     try {
-      // Envoi de la personne principale
       const mainPersonData = {
         name: form.nom,
         firstname: form.prenom,
