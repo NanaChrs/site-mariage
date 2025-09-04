@@ -109,55 +109,62 @@ export default function Home() {
           </Typography>
         </div>
 
-        <Accommodations />
-
-        <DressCode />
-
         <div style={{
-          position: 'relative',
-          width: '100%',
-          height: '950px', // Augmenté de 800px à 1000px
-          margin: '32px 0 0 0'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '32px',
+          paddingTop: '32px'
         }}>
-          <img
-            src={IMAGES.FORM_BACKGROUND}
-            alt="Laurent & Mathilde"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center 70%'
-            }}
-          />
+          <DressCode />
+
+          <Accommodations />
+
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '950px',
+            margin: 0 // Supprimé la marge car gérée par le gap
+          }}>
+            <img
+              src={IMAGES.FORM_BACKGROUND}
+              alt="Laurent & Mathilde"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 70%'
+              }}
+            />
+            <div
+              className="form-overlay-desktop"
+              style={{
+                position: 'absolute',
+                top: '0',
+                right: '0',
+                width: '50%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '20px', // Réduit de 32px à 20px
+                boxSizing: 'border-box'
+              }}
+            >
+              <RSVPForm showCard={true} />
+            </div>
+          </div>
+
+          {/* Formulaire mobile en dessous de la photo */}
           <div
-            className="form-overlay-desktop"
+            className="form-mobile"
             style={{
-              position: 'absolute',
-              top: '0',
-              right: '0',
-              width: '50%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '20px', // Réduit de 32px à 20px
-              boxSizing: 'border-box'
+              display: 'none',
+              padding: '32px 24px',
+              background: 'var(--color-background-main)'
             }}
           >
-            <RSVPForm showCard={true} />
+            <RSVPForm showCard={false} />
           </div>
-        </div>
-
-        {/* Formulaire mobile en dessous de la photo */}
-        <div
-          className="form-mobile"
-          style={{
-            display: 'none',
-            padding: '32px 24px',
-            background: 'var(--color-background-main)'
-          }}
-        >
-          <RSVPForm showCard={false} />
         </div>
       </section>
       <Footer />

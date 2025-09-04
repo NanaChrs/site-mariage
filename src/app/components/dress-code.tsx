@@ -4,7 +4,7 @@ import { IMAGES } from "../constants/images";
 
 export default function DressCode() {
   return (
-    <Box sx={{ mb: 6, px: 3 }}>
+    <Box sx={{ px: 3 }}>
       <Typography
         level="h2"
         sx={{
